@@ -56,9 +56,16 @@ with open(csvpath, newline='') as csvfile:
     print("Winner: " + str(candidate_name))
     print("-------------------------")
 
-
-
-       
+with open('election_results.txt', 'w') as text:
+    text.write("Election Results"+ "\n")
+    text.write("-------------------------\n")
+    text.write("Total Votes: " + str(total_votes) + "\n")
+    text.write("-------------------------\n")
+    for i in range(len(unique_candidates)):
+        text.write(str(unique_candidates[i])+ ": " + str("%.3f%%" % round(number/total_votes*100)) + " (" + str(number) + ")" +"\n")
+    text.write("-------------------------\n")
+    text.write("Winner: " + str(candidate_name) + "\n")
+    text.write("-------------------------\n")
 
 
 
