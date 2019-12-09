@@ -11,6 +11,7 @@ change_profit = []
 #Declaring variables for for-loop iterations
 max_increase_value=0
 max_decrease_value=0
+average=0
 # Open file with CSV module
 with open(csvpath, newline='') as csvfile:
 #Specifing delimiter and variable that holds contents
@@ -31,7 +32,8 @@ with open(csvpath, newline='') as csvfile:
         change_profit.append(profit[i+1]-profit[i])
 #Printing summery of profit/loss and the average of profit/loss between periods
     print("Total: $" + str (sum(profit)))
-    print("Average Change: $" + str(round(sum(change_profit)/len(change_profit),2)))
+    average=str(round(sum(change_profit)/len(change_profit),2))
+    print("Average Change: $" + average)
 #Iterating to find the greatest increase in profit over the entire period with the corresponding months
     for i in range(len(change_profit)):
         if change_profit[i]> max_increase_value:
@@ -45,3 +47,12 @@ with open(csvpath, newline='') as csvfile:
 #Printing the greatest increase and the greatest decrease in profit over the entire period
 print("Greatest Increase in Profits: " + str(max_increase_month) + " ($" + str(max_increase_value) + ")")
 print("Greatest Decrease in Profits: " + str(max_decrease_month) + " ($" + str(max_decrease_value) + ")")
+
+with open('budget_results.txt', 'w') as text:
+    text.write("Financial Analysis"+ "\n")
+    text.write("-------------------------\n")
+    text.write("Total Months: " + str(len(months)) + "\n")
+    text.write("Total Profits: $" + str (sum(profit)) +"\n")
+    text.write("Average Change: $" + average + "\n")
+    text.write("Greatest Increase in Profits: " + str(max_increase_month) + "($" + str(max_increase_value) + ")\n")
+    text.write("Greatest Decrease in Profits: " + str(max_decrease_month) + " ($" + str(max_decrease_value) + ")\n")
